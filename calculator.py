@@ -25,8 +25,8 @@ class Calculator:
             display_frame,
             textvariable=self.input_text,
             font=display_font,
-            bg="#1E1E1E",
-            fg="#FFFFFF",
+            bg="#FFFFFF",
+            fg="#000000",
             bd=0,
             justify=tk.RIGHT,
             state="readonly"
