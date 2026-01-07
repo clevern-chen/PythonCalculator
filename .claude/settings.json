@@ -1,0 +1,49 @@
+{
+  "rules": [
+    "When committing code changes, always test the code with appropriate tools (syntax check, linting, or running tests) before creating the commit",
+    "Use clear, descriptive commit messages that explain the 'why' not just the 'what'",
+    "For multi-file changes, review all changes with git diff before committing",
+    "Always check for open GitHub issues before starting new work",
+    "When fixing bugs or adding features, reference the relevant issue number in commit messages",
+    "Prefer editing existing files over creating new ones unless absolutely necessary",
+    "Keep code changes focused and avoid unnecessary refactoring or 'improvements' beyond the scope of the task",
+    "When creating GUI applications, ensure accessibility: proper colors, readable text, keyboard support",
+    "For Python projects, always verify syntax with 'python -m py_compile' before committing",
+    "When adding new features, update relevant documentation (README, docstrings, comments)",
+    "Use meaningful variable and function names that clearly convey purpose",
+    "Handle errors gracefully with try-except blocks and user-friendly error messages",
+    "Test both mouse and keyboard inputs for GUI applications",
+    "Organize code logically: imports at top, helper functions before main logic, main execution at bottom",
+    "Use type hints in Python where appropriate for better code clarity",
+    "Keep functions small and focused on a single responsibility",
+    "Add comments only where the logic isn't self-evident",
+    "For calculator or math applications, validate input to prevent errors",
+    "Maintain consistent code style throughout the project",
+    "Before pushing to GitHub, ensure all tests pass and the application runs correctly"
+  ],
+  "gitCommitTemplate": {
+    "format": "Title: Brief summary (50 chars max)\n\nBody:\n- Detailed explanation of changes\n- Why the changes were made\n- Any breaking changes or important notes\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>",
+    "includeIssueReferences": true,
+    "testBeforeCommit": true
+  },
+  "python": {
+    "syntaxCheckCommand": "python -m py_compile",
+    "formatter": "black (optional)",
+    "linter": "flake8 (optional)",
+    "testRunner": "pytest (optional)"
+  },
+  "codeStyle": {
+    "maxLineLength": 100,
+    "useTypeHints": true,
+    "docstringStyle": "Google or NumPy",
+    "importOrganization": "standard library, third-party, local"
+  },
+  "project": {
+    "alwaysIncludeFiles": [
+      "README.md",
+      ".gitignore",
+      "requirements.txt or package.json"
+    ],
+    "documentationStyle": "Clear, concise, with usage examples"
+  }
+}

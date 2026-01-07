@@ -1,0 +1,38 @@
+{
+  "_comment": "Copy this file to .claude/settings.json in your new projects and customize as needed",
+
+  "rules": [
+    "Always test code changes before committing",
+    "Use clear, descriptive commit messages that explain why changes were made",
+    "Check for open issues before starting new work using 'gh issue list'",
+    "Reference issue numbers in commits when fixing bugs or adding features",
+    "Prefer editing existing files over creating new ones",
+    "Keep changes focused - avoid unnecessary refactoring beyond the task scope",
+    "Review changes with 'git diff' before committing",
+    "Handle errors gracefully with user-friendly error messages",
+    "Update documentation when adding new features",
+    "Use meaningful names for variables, functions, and files",
+    "Maintain consistent code style throughout the project"
+  ],
+
+  "gitWorkflow": {
+    "commitMessageFormat": "Title (50 chars)\n\nBody:\n- What changed\n- Why it changed\n\nFixes #<issue> (if applicable)",
+    "alwaysTestBeforeCommit": true,
+    "alwaysReviewDiff": true,
+    "checkIssuesFirst": true
+  },
+
+  "codeQuality": {
+    "preferEditingOverCreating": true,
+    "keepChangesFocused": true,
+    "handleErrorsGracefully": true,
+    "useMeaningfulNames": true,
+    "maintainConsistentStyle": true
+  },
+
+  "documentation": {
+    "updateWhenAddingFeatures": true,
+    "includeUsageExamples": true,
+    "keepREADMECurrent": true
+  }
+}
