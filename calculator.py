@@ -1,11 +1,12 @@
 import tkinter as tk
 from tkinter import font
+import math
 
 class Calculator:
     def __init__(self, root):
         self.root = root
         self.root.title("Calculator")
-        self.root.geometry("400x600")
+        self.root.geometry("500x650")
         self.root.resizable(False, False)
 
         self.expression = ""
@@ -38,13 +39,14 @@ class Calculator:
         button_frame.pack(fill=tk.BOTH, expand=True)
 
         # Button layout
-        button_font = font.Font(family="Arial", size=18, weight="bold")
+        button_font = font.Font(family="Arial", size=16, weight="bold")
         buttons = [
+            ['x²', '√', 'x^y', 'log', 'ln'],
             ['C', 'CE', '%', '/'],
             ['7', '8', '9', '*'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
-            ['0', '.', '=', '']
+            ['0', '0_span', '.', '=']
         ]
 
         # Button colors
@@ -52,10 +54,12 @@ class Calculator:
         operator_color = "#FF9500"
         special_color = "#505050"
         equal_color = "#0A84FF"
+        function_color = "#5856D6"
 
         for row_idx, row in enumerate(buttons):
             for col_idx, button_text in enumerate(row):
-                if button_text == '':
+                # Skip placeholder for 0 button span
+                if button_text == '0_span':
                     continue
 
                 # Determine button color
@@ -65,6 +69,8 @@ class Calculator:
                     bg_color = operator_color
                 elif button_text == '=':
                     bg_color = equal_color
+                elif button_text in ['x²', '√', 'x^y', 'log', 'ln']:
+                    bg_color = function_color
                 else:
                     bg_color = number_color
 
@@ -90,10 +96,10 @@ class Calculator:
                             sticky="nsew", padx=2, pady=2)
 
         # Configure grid weights
-        for i in range(5):
+        for i in range(6):
             button_frame.grid_rowconfigure(i, weight=1)
-        for i in range(4):
-            button_frame.grid_columnconfigure(i, weight=1)
+        for i in range(5):
+            button_frame.grid_columnconfigure(i, weight=1, uniform="cols")
 
     def lighten_color(self, color):
         """Lighten a hex color for active state"""
@@ -105,6 +111,8 @@ class Calculator:
             return "#606060"
         elif color == "#0A84FF":
             return "#3A9FFF"
+        elif color == "#5856D6":
+            return "#7876E6"
         return color
 
     def bind_keyboard(self):
@@ -143,12 +151,59 @@ class Calculator:
         elif button_text == '=':
             # Calculate result
             try:
-                result = str(eval(self.expression))
+                # Replace x^y with ** for power operator
+                expression = self.expression.replace('x^y', '**')
+                result = str(eval(expression))
                 self.input_text.set(result)
                 self.expression = result
             except:
                 self.input_text.set("Error")
                 self.expression = ""
+
+        elif button_text == 'x²':
+            # Square function
+            try:
+                result = str(eval(self.expression) ** 2)
+                self.input_text.set(result)
+                self.expression = result
+            except:
+                self.input_text.set("Error")
+                self.expression = ""
+
+        elif button_text == '√':
+            # Square root function
+            try:
+                result = str(math.sqrt(eval(self.expression)))
+                self.input_text.set(result)
+                self.expression = result
+            except:
+                self.input_text.set("Error")
+                self.expression = ""
+
+        elif button_text == 'log':
+            # Logarithm base 10
+            try:
+                result = str(math.log10(eval(self.expression)))
+                self.input_text.set(result)
+                self.expression = result
+            except:
+                self.input_text.set("Error")
+                self.expression = ""
+
+        elif button_text == 'ln':
+            # Natural logarithm
+            try:
+                result = str(math.log(eval(self.expression)))
+                self.input_text.set(result)
+                self.expression = result
+            except:
+                self.input_text.set("Error")
+                self.expression = ""
+
+        elif button_text == 'x^y':
+            # Power operator
+            self.expression += 'x^y'
+            self.input_text.set(self.expression)
 
         else:
             # Add to expression
